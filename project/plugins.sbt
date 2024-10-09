@@ -1,1 +1,1 @@
-addSbtPlugin("org.foundweekends" % "sbt-bintray" % "0.5.4")
+addSbtPlugin("com.github.sbt" % "sbt-pgp" % "2.3.0")
