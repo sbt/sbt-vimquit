@@ -1,4 +1,4 @@
-version := "0.1.1-SNAPSHOT"
+version := "0.1.2-SNAPSHOT"
 organization := "com.eed3si9n"
 description := "sbt plugin to vimquit"
 licenses := Seq("MIT License" -> url("https://github.com/sbt/sbt-vimquit/blob/master/LICENSE"))
@@ -34,3 +34,4 @@ publishTo := {
   if isSnapshot.value then Some("snapshots" at nexus + "content/repositories/snapshots")
   else Some("releases" at nexus + "service/local/staging/deploy/maven2")
 }
+homepage := Some(url("https://github.com/sbt/sbt-vimquit"))
