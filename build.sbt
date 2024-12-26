@@ -10,7 +10,7 @@ lazy val plugin = (projectMatrix in file("plugin"))
   .settings(
     name := "sbt-vimquit",
   )
-  .jvmPlatform(scalaVersions = Seq("3.3.4", "2.12.20"))
+  .jvmPlatform(scalaVersions = Seq("3.6.2", "2.12.20"))
 
 scmInfo := Some(
   ScmInfo(
