@@ -10,7 +10,7 @@ lazy val plugin = (projectMatrix in file("plugin"))
   .settings(
     name := "sbt-vimquit",
   )
-  .jvmPlatform(scalaVersions = Seq("3.6.4", "2.12.20"))
+  .jvmPlatform(scalaVersions = Seq("3.7.2", "2.12.20"))
 
 scmInfo := Some(
   ScmInfo(
@@ -30,8 +30,8 @@ pomIncludeRepository := { _ =>
   false
 }
 publishTo := {
-  val nexus = "https://oss.sonatype.org/"
-  if isSnapshot.value then Some("snapshots" at nexus + "content/repositories/snapshots")
-  else Some("releases" at nexus + "service/local/staging/deploy/maven2")
+  val centralSnapshots = "https://central.sonatype.com/repository/maven-snapshots/"
+  if (version.value.endsWith("-SNAPSHOT")) Some("central-snapshots" at centralSnapshots)
+  else localStaging.value
 }
 homepage := Some(url("https://github.com/sbt/sbt-vimquit"))
