@@ -9,8 +9,16 @@ lazy val plugin = (projectMatrix in file("plugin"))
   .enablePlugins(SbtPlugin)
   .settings(
     name := "sbt-vimquit",
+    mimaPreviousArtifacts := {
+      val o = organization.value
+      val n = moduleName.value
+      val sbtV = (pluginCrossBuild / sbtBinaryVersion).value
+      val scalaV = scalaBinaryVersion.value
+      Set("0.1.1").map: v =>
+        Defaults.sbtPluginExtra(o %% n % v, sbtV, scalaV)
+    }
   )
-  .jvmPlatform(scalaVersions = Seq("3.7.2", "2.12.20"))
+  .jvmPlatform(scalaVersions = Seq("3.8.1", "2.12.20"))
 
 scmInfo := Some(
   ScmInfo(
@@ -35,3 +43,4 @@ publishTo := {
   else localStaging.value
 }
 homepage := Some(url("https://github.com/sbt/sbt-vimquit"))
+LocalRootProject / mimaReportBinaryIssues := Set.empty
