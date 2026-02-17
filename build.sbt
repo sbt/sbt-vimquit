@@ -18,7 +18,7 @@ lazy val plugin = (projectMatrix in file("plugin"))
         Defaults.sbtPluginExtra(o %% n % v, sbtV, scalaV)
     }
   )
-  .jvmPlatform(scalaVersions = Seq("3.7.2", "2.12.20"))
+  .jvmPlatform(scalaVersions = Seq("3.8.1", "2.12.20"))
 
 scmInfo := Some(
   ScmInfo(
