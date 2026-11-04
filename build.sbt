@@ -1,7 +1,7 @@
 version := "0.1.2-SNAPSHOT"
 organization := "com.eed3si9n"
 description := "sbt plugin to vimquit"
-licenses := Seq("MIT License" -> url("https://github.com/sbt/sbt-vimquit/blob/master/LICENSE"))
+licenses := Seq("MIT License" -> uri("https://github.com/sbt/sbt-vimquit/blob/master/LICENSE"))
 scalacOptions := Seq("-deprecation", "-unchecked")
 publishMavenStyle := true
 
@@ -9,21 +9,36 @@ lazy val plugin = (projectMatrix in file("plugin"))
   .enablePlugins(SbtPlugin)
   .settings(
     name := "sbt-vimquit",
+    pluginCrossBuild / sbtVersion := {
+      scalaBinaryVersion.value match
+        case "2.12" => "1.5.8"
+        case _      => "2.0.0"
+    },
+    scriptedSbt := {
+      scalaBinaryVersion.value match
+        case "2.12" => "1.10.6"
+        case _      => (pluginCrossBuild / sbtVersion).value
+    },
+    scalacOptions ++= {
+      scalaBinaryVersion.value match
+        case "2.12" =>
+          Seq("-Xsource:3", "-release:8", "-Xlint")
+        case "3" => Nil
+    },
   )
-  .jvmPlatform(scalaVersions = Seq("3.7.2", "2.12.20"))
+  .jvmPlatform(
+    scalaVersions = Seq("3.8.4", "2.12.20")
+  )
 
 scmInfo := Some(
-  ScmInfo(
-    url("https://github.com/sbt/sbt-vimquit"),
-    "scm:git@github.com:sbt/sbt-vimquit.git"
-  )
+  ScmInfo(uri("https://github.com/sbt/sbt-vimquit"), "scm:git@github.com:sbt/sbt-vimquit.git")
 )
 developers := List(
   Developer(
     id = "eed3si9n",
     name = "Eugene Yokota",
     email = "@eed3si9n",
-    url = url("https://eed3si9n.com/")
+    url = uri("https://eed3si9n.com/"),
   )
 )
 pomIncludeRepository := { _ =>
@@ -31,7 +46,7 @@ pomIncludeRepository := { _ =>
 }
 publishTo := {
   val centralSnapshots = "https://central.sonatype.com/repository/maven-snapshots/"
-  if (version.value.endsWith("-SNAPSHOT")) Some("central-snapshots" at centralSnapshots)
+  if version.value.endsWith("-SNAPSHOT") then Some("central-snapshots" at centralSnapshots)
   else localStaging.value
 }
-homepage := Some(url("https://github.com/sbt/sbt-vimquit"))
+homepage := Some(uri("https://github.com/sbt/sbt-vimquit"))
