@@ -1,2 +1,4 @@
+version = "0.2.2"
+
 # The build is Scala 3 (sbt 2); plugin/.scruff.toml covers the plugin.
 dialect = "scala3"
