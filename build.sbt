@@ -12,11 +12,11 @@ lazy val plugin = (projectMatrix in file("plugin"))
     pluginCrossBuild / sbtVersion := {
       scalaBinaryVersion.value match
         case "2.12" => "1.5.8"
-        case _      => "2.0.0"
+        case _      => "2.1.0"
     },
     scriptedSbt := {
       scalaBinaryVersion.value match
-        case "2.12" => "1.10.6"
+        case "2.12" => "1.13.1"
         case _      => (pluginCrossBuild / sbtVersion).value
     },
     scalacOptions ++= {
@@ -27,7 +27,7 @@ lazy val plugin = (projectMatrix in file("plugin"))
     },
   )
   .jvmPlatform(
-    scalaVersions = Seq("3.8.4", "2.12.20")
+    scalaVersions = Seq("3.9.0", "2.12.21")
   )
 
 scmInfo := Some(
