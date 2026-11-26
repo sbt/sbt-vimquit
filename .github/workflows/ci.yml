@@ -12,6 +12,14 @@ jobs:
             java: 17
             distribution: zulu
             jobtype: 1
+          - os: ubuntu-latest
+            java: 21
+            distribution: zulu
+            jobtype: 1
+          - os: ubuntu-latest
+            java: 25
+            distribution: zulu
+            jobtype: 1
     runs-on: ${{ matrix.os }}
     env:
       JAVA_OPTS: -Xms800M -Xmx1G -Xss2M -XX:ReservedCodeCacheSize=128M -Dfile.encoding=UTF-8
